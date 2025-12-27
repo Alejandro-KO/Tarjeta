@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efecto Neón Fade</title>
+    
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+    <style>
+        body {
+            background-color: #050505; /* Fondo casi negro para resaltar el neón */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .contenedor-neon {
+            text-align: center;
+            max-width: 90%; /* Ajuste para móviles */
+        }
+
+        #typed {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+            /* Efecto Neón Rosa */
+            text-shadow: 
+                0 0 5px #ff00de,
+                0 0 10px #ff00de,
+                0 0 20px #ff00de,
+                0 0 40px #ff00de;
+            line-height: 1.4;
+        }
+
+        /* Estilo del cursor neón */
+        .typed-cursor {
+            color: #ff00de;
+            font-size: 1.8rem;
+            text-shadow: 0 0 10px #ff00de;
+        }
+
+        /* Clase necesaria para el efecto de desvanecimiento */
+        .typed-fade-out {
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor-neon">
+        <span id="typed"></span>
+    </div>
+
+    <script>
+        var typed = new Typed('#typed', {
+            strings: [
+                'Este es un mensaje largo pensado para verse increíble en pantallas de celulares.^1000',
+                'En lugar de borrarse letra por letra, verás cómo la frase completa se desvanece suavemente.^1000',
+                'El color rosa neón le da un toque moderno y vibrante a tu interfaz móvil.^1000',
+                '¿Qué te parece este nuevo estilo?'
+            ],
+            typeSpeed: 50,      // Velocidad al escribir
+            fadeOut: true,      // ¡ESTA ES LA CLAVE! Se desvanece en lugar de borrarse
+            fadeOutDelay: 500,  // Tiempo del efecto de desvanecimiento
+            loop: true,
+            showCursor: true,
+            cursorChar: '|'
+        });
+    </script>
+
+</body>
+</html>
