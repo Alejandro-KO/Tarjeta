@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archivo Confidencial</title>
+    
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+    <style>
+        :root {
+            --neon-pink: #ff00de;
+            --neon-red: #ff0000;
+        }
+
+        body {
+            background-color: #050505;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .btn-neon {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--neon-pink);
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 0 10px var(--neon-pink);
+            transition: 0.3s;
+            text-shadow: 0 0 5px var(--neon-pink);
+        }
+
+        .btn-neon:hover {
+            background: var(--neon-pink);
+            box-shadow: 0 0 30px var(--neon-pink);
+        }
+
+        .pantalla {
+            display: none; 
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            width: 90%;
+        }
+
+        .activa {
+            display: flex; 
+        }
+
+        .advertencia {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        #typed {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-shadow: 0 0 5px var(--neon-pink), 0 0 15px var(--neon-pink);
+        }
+
+        /* Estilo para el error de acceso denegado */
+        .denegado {
+            color: var(--neon-red);
+            text-shadow: 0 0 10px var(--neon-red);
+            font-size: 2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="pantalla-error" class="pantalla">
+        <h1 class="denegado">ACCESO DENEGADO</h1>
+        <p>Este archivo ha sido destruido permanentemente.</p>
+    </div>
+
+    <div id="pantalla1" class="pantalla">
+        <button class="btn-neon" onclick="cambiarPantalla(2)">
+            Contenido Altamente Secreto
+        </button>
+    </div>
+
+    <div id="pantalla2" class="pantalla">
+        <p class="advertencia">
+            ESTE MENSAJE ES ALTAMENTE CONFIDENCIAL <br>
+            Y UNA VEZ TERMINADO SERÁ DESTRUIDO.
+        </p>
+        <button class="btn-neon" onclick="iniciarMensaje()">
+            Leer Mensaje
+        </button>
+    </div>
+
+    <div id="pantalla3" class="pantalla">
+        <div id="typed"></div>
+    </div>
+
+    <script>
+        // --- CONFIGURACIÓN DE MISIÓN ---
+        // Cambia este ID cada vez que quieras reactivar el mensaje para todos.
+        const ID_MISION = "mision_alpha_01"; 
+
+        // Al cargar la página, verificamos si ya se leyó
+        window.onload = function() {
+            const estadoMision = localStorage.getItem("estado_mision");
+
+            if (estadoMision === ID_MISION) {
+                // Si ya se leyó esta misión, mostramos error directamente
+                document.getElementById('pantalla-error').classList.add('activa');
+            } else {
+                // Si es nueva, mostramos la pantalla 1
+                document.getElementById('pantalla1').classList.add('activa');
+            }
+        };
+
+        function cambiarPantalla(n) {
+            document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
+            document.getElementById('pantalla' + n).classList.add('activa');
+        }
+
+        function iniciarMensaje() {
+            cambiarPantalla(3);
+
+            new Typed('#typed', {
+                strings: [
+                    'Iniciando decodificación del archivo...^1000',
+                    'Ubicación actual confirmada. Acceso concedido.^1000',
+                    'El objetivo se encuentra en movimiento según los últimos informes.^1000',
+                    'No compartas esta información con nadie fuera de la organización.^1000',
+                    'Este sistema se auto-destruirá en 3... 2... 1...^2000',
+                    'SESIÓN FINALIZADA.'
+                ],
+                typeSpeed: 50,
+                fadeOut: true,
+                fadeOutDelay: 800,
+                loop: false,
+                showCursor: true,
+                onComplete: (self) => {
+                    // Marcamos la misión como LEÍDA en el navegador del usuario
+                    localStorage.setItem("estado_mision", ID_MISION);
+
+                    setTimeout(() => {
+                        document.body.style.backgroundColor = "black";
+                        document.getElementById('pantalla3').innerHTML = "";
+                        // Opcional: Redirigir a pantalla de error para confirmar bloqueo inmediato
+                        cambiarPantalla('-error');
+                    }, 2000);
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
