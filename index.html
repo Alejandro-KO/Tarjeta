@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archivo Confidencial</title>
+    <title>Tarjeta Especial 2026</title>
     
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
 
@@ -11,6 +11,7 @@
         :root {
             --neon-pink: #ff00de;
             --neon-red: #ff0000;
+            --gold: #ffd700;
         }
 
         body {
@@ -23,6 +24,17 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
+        }
+
+        /* Canvas para fuegos artificiales */
+        #canvas-fuegos {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            display: none; /* Se activa al final */
         }
 
         .btn-neon {
@@ -38,6 +50,7 @@
             box-shadow: 0 0 10px var(--neon-pink);
             transition: 0.3s;
             text-shadow: 0 0 5px var(--neon-pink);
+            z-index: 10;
         }
 
         .btn-neon:hover {
@@ -52,6 +65,7 @@
             text-align: center;
             padding: 20px;
             width: 90%;
+            z-index: 5;
         }
 
         .activa {
@@ -71,21 +85,26 @@
             text-shadow: 0 0 5px var(--neon-pink), 0 0 15px var(--neon-pink);
         }
 
-        /* Estilo para el error de acceso denegado */
-        .denegado {
-            color: var(--neon-red);
-            text-shadow: 0 0 10px var(--neon-red);
-            font-size: 2rem;
-            font-weight: bold;
+        /* Estilos Año Nuevo */
+        .celebracion h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            text-shadow: 0 0 20px var(--gold);
+            color: white;
+        }
+
+        .celebracion h2 {
+            font-size: 6rem;
+            margin: 0;
+            background: linear-gradient(to bottom, var(--gold), #ff8c00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
 <body>
 
-    <div id="pantalla-error" class="pantalla">
-        <h1 class="denegado">ACCESO DENEGADO</h1>
-        <p>Este archivo ha sido destruido permanentemente.</p>
-    </div>
+    <canvas id="canvas-fuegos"></canvas>
 
     <div id="pantalla1" class="pantalla">
         <button class="btn-neon" onclick="cambiarPantalla(2)">
@@ -97,8 +116,8 @@
         <p class="advertencia">
             Este es un mensaje especial para <br>
             Gaby la hermosa chica que con solo <br>
-            una sonrisa es capaz de iluminiar <br>
-            hasta los dias mas obscuros.
+            una sonrisa es capaz de iluminar <br>
+            hasta los días más oscuros.
         </p>
         <button class="btn-neon" onclick="iniciarMensaje()">
             Leer Mensaje
@@ -109,60 +128,113 @@
         <div id="typed"></div>
     </div>
 
-    <script>
-        // --- CONFIGURACIÓN DE MISIÓN ---
-        // Cambia este ID cada vez que quieras reactivar el mensaje para todos.
-        const ID_MISION = "mision_alpha_01"; 
+    <div id="pantalla-celebracion" class="pantalla celebracion">
+        <h1>¡FELIZ AÑO NUEVO!</h1>
+        <h2>2026</h2>
+        <p style="font-size: 1.5rem; color: var(--gold);">Para Gaby</p>
+    </div>
 
-        // Al cargar la página, verificamos si ya se leyó
+    <script>
+        const ID_MISION = "mision_año_nuevo_2026"; 
+
         window.onload = function() {
             const estadoMision = localStorage.getItem("estado_mision");
-
             if (estadoMision === ID_MISION) {
-                // Si ya se leyó esta misión, mostramos error directamente
-                document.getElementById('pantalla-error').classList.add('activa');
+                activarFuegos();
+                cambiarPantalla('99'); // Ir directo a la celebración si ya se vio
             } else {
-                // Si es nueva, mostramos la pantalla 1
                 document.getElementById('pantalla1').classList.add('activa');
             }
         };
 
         function cambiarPantalla(n) {
             document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
-            document.getElementById('pantalla' + n).classList.add('activa');
+            if(n === '99') {
+                document.getElementById('pantalla-celebracion').classList.add('activa');
+            } else {
+                document.getElementById('pantalla' + n).classList.add('activa');
+            }
         }
 
         function iniciarMensaje() {
             cambiarPantalla(3);
-
             new Typed('#typed', {
                 strings: [
                     'Iniciando decodificación del archivo...^1000',
                     'Ubicación actual confirmada. Acceso concedido.^1000',
-                    'El objetivo se encuentra en movimiento según los últimos informes.^1000',
-                    'No compartas esta información con nadie fuera de la organización.^1000',
-                    'Este sistema se auto-destruirá en 3... 2... 1...^2000',
-                    'SESIÓN FINALIZADA.'
+                    'El objetivo (Gaby) ha sido detectado.^1000',
+                    'Iniciando protocolo de celebración...^1000',
+                    'Este sistema se transformará en 3... 2... 1...^2000',
+                    'FELIZ 2026.'
                 ],
                 typeSpeed: 50,
-                fadeOut: true,
-                fadeOutDelay: 800,
-                loop: false,
-                showCursor: true,
                 onComplete: (self) => {
-                    // Marcamos la misión como LEÍDA en el navegador del usuario
                     localStorage.setItem("estado_mision", ID_MISION);
-
                     setTimeout(() => {
-                        document.body.style.backgroundColor = "black";
                         document.getElementById('pantalla3').innerHTML = "";
-                        // Opcional: Redirigir a pantalla de error para confirmar bloqueo inmediato
-                        cambiarPantalla('-error');
-                    }, 2000);
+                        activarFuegos();
+                        cambiarPantalla('99');
+                    }, 1500);
                 }
             });
         }
-    </script>
 
+        // --- LÓGICA DE FUEGOS ARTIFICIALES ---
+        const canvas = document.getElementById('canvas-fuegos');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function activarFuegos() {
+            canvas.style.display = "block";
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            animate();
+        }
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x; this.y = y; this.color = color;
+                this.velocity = { x: (Math.random() - 0.5) * 8, y: (Math.random() - 0.5) * 8 };
+                this.alpha = 1;
+                this.friction = 0.95;
+            }
+            draw() {
+                ctx.globalAlpha = this.alpha;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            update() {
+                this.velocity.x *= this.friction;
+                this.velocity.y *= this.friction;
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+                this.alpha -= 0.01;
+            }
+        }
+
+        function createFirework() {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * (canvas.height * 0.6);
+            const color = `hsl(${Math.random() * 360}, 100%, 60%)`;
+            for (let i = 0; i < 80; i++) particles.push(new Particle(x, y, color));
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.fillStyle = 'rgba(5, 5, 5, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, i) => {
+                if (p.alpha > 0) { p.update(); p.draw(); }
+                else { particles.splice(i, 1); }
+            });
+            if (Math.random() < 0.04) createFirework();
+        }
+    </script>
 </body>
 </html>
