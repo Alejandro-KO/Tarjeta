@@ -72,17 +72,19 @@
             display: flex; 
         }
 
-        .advertencia {
-            font-size: 1.2rem;
+        .Presentacion {
+            font-size: 1.8rem;
             margin-bottom: 30px;
-            color: #ccc;
+            text-shadow: 0 0 5px var(--neon-pink), 0 0 15px var(--neon-pink);
+            font-family: 'Dancing Script', cursive;
             line-height: 1.6;
         }
 
         #typed {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
             text-shadow: 0 0 5px var(--neon-pink), 0 0 15px var(--neon-pink);
+            font-family: 'Dancing Script', cursive;
         }
 
         /* Estilos Año Nuevo */
@@ -108,16 +110,16 @@
 
     <div id="pantalla1" class="pantalla">
         <button class="btn-neon" onclick="cambiarPantalla(2)">
-            Contenido Altamente Secreto
+            INICIO
         </button>
     </div>
 
     <div id="pantalla2" class="pantalla">
-        <p class="advertencia">
-            Este es un mensaje especial para Gaby <br>
-            una chica muy hermosa que tiene una <br>
-            sonrisa que es capaz de iluminar <br>
-            hasta los días más oscuros.
+        <p class="Presentacion">
+            Este es un mensaje especial para <br>
+            Gaby una chica muy hermosa que <br>
+            tiene una sonrisa que brilla para  <br>
+            iluminar hasta el dia mas oscuro.
         </p>
         <button class="btn-neon" onclick="iniciarMensaje()">
             Leer Mensaje
@@ -162,10 +164,16 @@
                 strings: [
                     'Iniciando decodificación del archivo...^1000',
                    /* 'Ubicación actual confirmada. Acceso concedido.^1000',
+                    'El objetivo se encuentra en movimiento según los últimos informes.^1000',
                     'El objetivo (Gaby) ha sido detectado.^1000',
                     'Iniciando protocolo de celebración...^1000',
                     'Este sistema se transformará en 3... 2... 1...^2000',
-                    'FELIZ 2026.'*/
+                    'FELIZ 2026.'
+                    El año esta por terminar y quisiera tomar un momento para desearte un feliz año nuevo, 
+no tuve la fortuna de conocerte tanto como me hubiera gustado pero lo poco que llegue a ver de ti me 
+fue suficiente para darme cuenta que eres una persona maravillosa, todo el esfuerzo y empeño que 
+pones en tu trabajo te van a llevar a lograr grandes cosas, sigue dando lo mejor de ti y veras que 
+no habrá cosa que no puedas lograr*/
                 ],
                 typeSpeed: 50,
                 onComplete: (self) => {
