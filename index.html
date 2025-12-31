@@ -6,7 +6,7 @@
     <title>Tarjeta Especial 2026</title>
     
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --neon-pink: #ff00de;
@@ -17,7 +17,7 @@
         body {
             background-color: #050505;
             color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Dancing Script', cursive;
             margin: 0;
             display: flex;
             justify-content: center;
@@ -73,28 +73,32 @@
         }
 
         .advertencia {
-            font-size: 1.2rem;
+            font-size: 1.8rem; /* Aumentamos un poco porque la cursiva suele verse más pequeña */
             margin-bottom: 30px;
-            color: #ccc;
-            line-height: 1.6;
+            color: #eee;
+            line-height: 1.4;
+            font-family: 'Dancing Script', cursive;
         }
 
         #typed {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
             text-shadow: 0 0 5px var(--neon-pink), 0 0 15px var(--neon-pink);
+            font-family: 'Dancing Script', cursive;
         }
 
         /* Estilos Año Nuevo */
         .celebracion h1 {
-            font-size: 3.5rem;
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
             margin: 0;
             text-shadow: 0 0 20px var(--gold);
             color: white;
         }
 
         .celebracion h2 {
-            font-size: 6rem;
+            font-family: 'Arial', sans-serif; /* El número suele verse mejor en letra imprenta para que se entienda el 2026 */
+            font-size: 7rem;
             margin: 0;
             background: linear-gradient(to bottom, var(--gold), #ff8c00);
             -webkit-background-clip: text;
@@ -108,16 +112,16 @@
 
     <div id="pantalla1" class="pantalla">
         <button class="btn-neon" onclick="cambiarPantalla(2)">
-            Contenido Altamente Secreto
+            INICIO
         </button>
     </div>
 
     <div id="pantalla2" class="pantalla">
         <p class="advertencia">
-            Este es un mensaje especial para Gaby <br>
-            una chica muy hermosa que tiene una <br>
-            sonrisa que es capaz de iluminar <br>
-            hasta los días más oscuros.
+            Este es un mensaje especial para <br>
+            Gaby una chica muy hermosa que <br>
+            tiene una sonrisa que es capaz de <br>
+            iluminar hasta los días más oscuros.
         </p>
         <button class="btn-neon" onclick="iniciarMensaje()">
             Leer Mensaje
